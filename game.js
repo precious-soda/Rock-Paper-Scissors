@@ -73,6 +73,24 @@ function getResult(yourMove, computerMove) {
 
 }
 
+let isAutoPlaying = false;
+let intervalId;
+
+function autoPlay() {
+
+  if (!isAutoPlaying) {
+    intervalId = setInterval(() => {
+      const playerMove = generate();
+      const computerMove = generate();
+      getResult(playerMove, computerMove);
+    }, 1000);
+    isAutoPlaying = true;
+  } else {
+    clearInterval(intervalId);
+    isAutoPlaying = false;
+  }
+}
+
 function updateScoreElement() {
   document.querySelector('.js-score').innerHTML = `Wins:${score.wins}, Losses:${score.losses}, Ties:${score.ties}`;
 }
